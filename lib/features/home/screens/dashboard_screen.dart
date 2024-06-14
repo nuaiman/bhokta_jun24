@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_stepper/easy_stepper.dart';
-import 'package:bhokta_consumer/core/constants/palette.dart';
-import 'package:bhokta_consumer/core/constants/pngs.dart';
+import '../../../core/constants/palette.dart';
+import '../../../core/constants/pngs.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});

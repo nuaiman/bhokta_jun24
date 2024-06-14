@@ -1,8 +1,8 @@
-import 'package:bhokta_consumer/core/constants/palette.dart';
-import 'package:bhokta_consumer/features/auth/screens/profile_screen.dart';
-import 'package:bhokta_consumer/features/home/screens/dashboard_screen.dart';
-import 'package:bhokta_consumer/features/records/screens/add_complain_screen.dart';
-import 'package:bhokta_consumer/features/records/screens/all_complains_screen.dart';
+import '../../../core/constants/palette.dart';
+import '../../auth/screens/profile_screen.dart';
+import 'dashboard_screen.dart';
+import '../../records/screens/add_complain_screen.dart';
+import '../../records/screens/all_complains_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final screens = [
-    DashboardScreen(),
+    const DashboardScreen(),
     const AddComplainScreen(),
     const AllComplainsScreen(),
     const ProfileScreen(),

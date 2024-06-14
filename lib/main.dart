@@ -1,5 +1,5 @@
-import 'package:bhokta_consumer/core/constants/palette.dart';
-import 'package:bhokta_consumer/features/home/screens/home_screen.dart';
+import 'core/constants/palette.dart';
+import 'features/auth/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,7 +19,7 @@ class BhoktaOdhikarConsumerApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Palette.green),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: const LandingScreen(),
     );
   }
 }

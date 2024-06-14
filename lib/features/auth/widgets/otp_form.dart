@@ -1,6 +1,6 @@
-import 'package:bhokta_consumer/core/utils/navigators.dart';
-import 'package:bhokta_consumer/features/auth/notifiers/auth_mode_nitifier.dart';
-import 'package:bhokta_consumer/features/home/screens/home_screen.dart';
+import '../../../core/utils/navigators.dart';
+import '../notifiers/auth_mode_nitifier.dart';
+import '../../home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:otp_timer_button/otp_timer_button.dart';

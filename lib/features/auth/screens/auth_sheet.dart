@@ -1,6 +1,6 @@
-import 'package:bhokta_consumer/features/auth/notifiers/auth_mode_nitifier.dart';
-import 'package:bhokta_consumer/features/auth/widgets/otp_form.dart';
-import 'package:bhokta_consumer/features/auth/widgets/registration_form.dart';
+import '../notifiers/auth_mode_nitifier.dart';
+import '../widgets/otp_form.dart';
+import '../widgets/registration_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/palette.dart';

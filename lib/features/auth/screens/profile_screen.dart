@@ -1,4 +1,4 @@
-import 'package:bhokta_consumer/features/auth/widgets/auth_field.dart';
+import '../widgets/auth_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -52,9 +52,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           children: [
             AuthField(controller: fullnameController, labelText: 'পুরো নাম'),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             AuthField(controller: nidController, labelText: 'এনআইডি'),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -92,22 +92,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             AuthField(controller: professionController, labelText: 'পেশা'),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             AuthField(controller: fathernameController, labelText: 'বাবার নাম'),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             AuthField(
                 controller: mothernameController, labelText: 'মায়ের নাম'),
-            SizedBox(height: 8),
-            Divider(),
+            const SizedBox(height: 8),
+            const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton.icon(
                   onPressed: () {},
-                  label: Text('পাসওয়ার্ড পরিবর্তন'),
-                  icon: Icon(Icons.lock_reset),
+                  label: const Text('পাসওয়ার্ড পরিবর্তন'),
+                  icon: const Icon(Icons.lock_reset),
                 ),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/constants/palette.dart';
 import '../../../models/landing_card_info.dart';
 import 'landing_custom_card.dart';

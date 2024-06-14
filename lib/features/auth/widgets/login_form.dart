@@ -1,4 +1,4 @@
-import 'package:bhokta_consumer/features/auth/notifiers/auth_mode_nitifier.dart';
+import '../notifiers/auth_mode_nitifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

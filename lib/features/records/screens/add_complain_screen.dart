@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bhokta_consumer/features/auth/widgets/auth_field.dart';
+import '../../auth/widgets/auth_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

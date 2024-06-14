@@ -1,4 +1,4 @@
-import 'package:bhokta_consumer/features/auth/screens/auth_sheet.dart';
+import 'auth_sheet.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constants/palette.dart';
 import '../../../core/constants/pngs.dart';

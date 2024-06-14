@@ -7,7 +7,7 @@ class AllComplainsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('অভিযোগের তালিকা'),
+        title: const Text('অভিযোগের তালিকা'),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
