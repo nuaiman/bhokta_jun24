@@ -1,7 +1,8 @@
 import 'core/constants/palette.dart';
-import 'features/auth/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'features/auth/screens/landing_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: BhoktaOdhikarConsumerApp()));

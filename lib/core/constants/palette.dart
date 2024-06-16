@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Palette {
-  static const Color green = Color(0xFF304D30);
+  static const Color black = Color(0xFF212121);
+  static const Color green = Color(0xFF008738);
   static const Color greyLite = Color(0xFFE6E8EC);
   static const Color scaffold = Color(0xFFF4F5F7);
   static const Color white = Color(0xFFFFFFFF);
