@@ -1,4 +1,4 @@
-import 'package:bhokta_consumer/features/auth/screens/national_details_screen.dart';
+import 'national_details_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,5 @@
-import 'package:bhokta_consumer/core/constants/palette.dart';
-import 'package:bhokta_consumer/features/auth/screens/address_details_screen.dart';
+import '../../../core/constants/palette.dart';
+import 'address_details_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';

@@ -1,5 +1,5 @@
-import 'package:bhokta_consumer/core/utils/navigators.dart';
-import 'package:bhokta_consumer/features/auth/screens/new_password_screen.dart';
+import '../../../core/utils/navigators.dart';
+import 'new_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_timer_button/otp_timer_button.dart';
 import 'package:pinput/pinput.dart';

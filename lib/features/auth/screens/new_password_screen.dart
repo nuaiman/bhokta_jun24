@@ -1,5 +1,4 @@
-import 'package:bhokta_consumer/core/utils/navigators.dart';
-import 'package:bhokta_consumer/features/auth/screens/otp_screen.dart';
+import '../../../core/utils/navigators.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';

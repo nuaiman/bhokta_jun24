@@ -1,4 +1,5 @@
-import 'package:bhokta_consumer/core/utils/navigators.dart';
+import '../../../core/utils/navigators.dart';
+import 'login_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';
@@ -33,7 +34,7 @@ class AuthScreen extends StatelessWidget {
           Column(
             children: [
               RoundedElevatedButton(
-                label: 'শুরু করুন',
+                label: 'রেজিস্ট্রেশন',
                 onTap: () {
                   navigate(context, const NumberRegistrationScreen());
                 },
@@ -43,8 +44,10 @@ class AuthScreen extends StatelessWidget {
               const Text('ইতঃমধ্যে রেজিস্ট্রেশন করেছেন?'),
               const SizedBox(height: 8),
               RoundedOutlinedButton(
-                label: 'শুরু করুন',
-                onTap: () {},
+                label: 'লগইন',
+                onTap: () {
+                  navigate(context, const LoginScreen());
+                },
               ),
             ],
           ),

@@ -1,7 +1,8 @@
-import 'package:bhokta_consumer/core/constants/palette.dart';
+import 'professional_details_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';
+import '../../../core/utils/navigators.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 
 class AddressDetailsScreen extends StatefulWidget {
@@ -12,15 +13,15 @@ class AddressDetailsScreen extends StatefulWidget {
 }
 
 class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
-  final nidController = TextEditingController();
-  final birthIdController = TextEditingController();
-  final passportIdController = TextEditingController();
+  String? division;
+  String? state;
+  final addressController = TextEditingController();
+  final postCodeController = TextEditingController();
 
   @override
   void dispose() {
-    nidController.dispose();
-    birthIdController.dispose();
-    passportIdController.dispose();
+    addressController.dispose();
+    postCodeController.dispose();
     super.dispose();
   }
 
@@ -45,71 +46,94 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                const Text(
+                  'ঠিকানা প্রদান করুন',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 32,
+                  ),
+                ),
+                Column(
                   children: [
-                    Text(
-                      'ঠিকানা তথ্য প্রদান',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 32,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: TextField(
+                        controller: addressController,
+                        decoration: const InputDecoration(
+                          hintText: 'সম্পুর্ণ ঠিকানা*',
+                          border: OutlineInputBorder(),
+                        ),
                       ),
                     ),
-                    Text(
-                      'করুন',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 32,
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16), // Reduced padding
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: ExpansionTile(
+                              dense: true,
+                              tilePadding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              collapsedShape: const OutlineInputBorder(),
+                              shape: const OutlineInputBorder(),
+                              title: Text(
+                                division == null ? 'বিভাগ' : division!,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              children: [
+                                ListTile(
+                                  title: const Text('ঢাকা'),
+                                  onTap: () {
+                                    setState(() {
+                                      division = 'dhaka';
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: ExpansionTile(
+                              dense: true,
+                              tilePadding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              collapsedShape: const OutlineInputBorder(),
+                              shape: const OutlineInputBorder(),
+                              title: Text(
+                                division == null ? 'জেলা' : division!,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              children: [
+                                ListTile(
+                                  title: const Text('ঢাকা'),
+                                  onTap: () {
+                                    setState(() {
+                                      division = 'dhaka';
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: TextField(
+                        controller: postCodeController,
+                        decoration: const InputDecoration(
+                          hintText: 'পোস্টাল কোড*',
+                          border: OutlineInputBorder(),
+                        ),
                       ),
                     ),
                   ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                    child: Column(
-                      children: [
-                        const TextField(
-                          enabled: false,
-                          decoration: InputDecoration(
-                            hintText: 'পরিচয় তথ্য নির্বাচন',
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 8),
-                          ),
-                        ),
-                        const Divider(color: Palette.black),
-                        TextField(
-                          controller: nidController,
-                          decoration: const InputDecoration(
-                            hintText: 'জাতীয় পরিচয় পত্রের নাম্বার',
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 8),
-                          ),
-                        ),
-                        const Divider(color: Palette.black),
-                        TextField(
-                          controller: birthIdController,
-                          decoration: const InputDecoration(
-                            hintText: 'জন্মনিবন্ধন সনদের নাম্বার',
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 8),
-                          ),
-                        ),
-                        const Divider(color: Palette.black),
-                        TextField(
-                          controller: passportIdController,
-                          decoration: const InputDecoration(
-                            hintText: 'পাসপোর্টের নাম্বার',
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 8),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
                 const SizedBox(),
                 const SizedBox(),
@@ -124,7 +148,7 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
         child: RoundedElevatedButton(
           label: 'পরবর্তী',
           onTap: () {
-            // navigate(context, const PersonalDetailsScreen());
+            navigate(context, const ProfessionalDetailsScreen());
           },
         ),
       ),

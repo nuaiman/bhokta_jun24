@@ -1,7 +1,7 @@
-import 'package:bhokta_consumer/core/constants/palette.dart';
-import 'package:bhokta_consumer/core/constants/pngs.dart';
-import 'package:bhokta_consumer/core/utils/navigators.dart';
-import 'package:bhokta_consumer/core/widgets/rounded_elevated_button.dart';
+import '../../../core/constants/palette.dart';
+import '../../../core/constants/pngs.dart';
+import '../../../core/utils/navigators.dart';
+import '../../../core/widgets/rounded_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 import 'auth_screen.dart';
