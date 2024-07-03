@@ -37,6 +37,7 @@ dependencies:
   otp_timer_button: ^1.1.1
   intl: ^0.19.0
   easy_stepper: ^0.8.5
+  scroll_date_picker: ^3.8.0
 
 
   # The following adds the Cupertino Icons font to your application.

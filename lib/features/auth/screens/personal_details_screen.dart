@@ -1,5 +1,7 @@
+import 'package:intl/intl.dart';
+import 'package:scroll_date_picker/scroll_date_picker.dart';
+
 import 'national_details_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';
@@ -204,22 +206,56 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                   const EdgeInsets.symmetric(horizontal: 8),
                               collapsedShape: const OutlineInputBorder(),
                               shape: const OutlineInputBorder(),
-                              title: const Text(
-                                'জন্ম তারিখ*',
+                              title: Text(
+                                birthDate == null
+                                    ? 'জন্ম তারিখ*'
+                                    : DateFormat('d MMM yyyy')
+                                        .format(birthDate!),
                                 style: TextStyle(fontSize: 16),
                               ),
                               children: [
                                 SizedBox(
                                   height: 200,
-                                  child: CupertinoDatePicker(
-                                    mode: CupertinoDatePickerMode.date,
-                                    initialDateTime: DateTime.now(),
-                                    onDateTimeChanged: (DateTime newDate) {
+                                  child: ScrollDatePicker(
+                                    selectedDate: birthDate ?? DateTime.now(),
+                                    onDateTimeChanged: (DateTime value) {
                                       setState(() {
-                                        birthDate = newDate;
+                                        birthDate = value;
                                       });
                                     },
                                   ),
+                                  // ---------------------------------------
+                                  // ScrollWheelDatePicker(
+                                  //   theme: FlatDatePickerTheme(
+                                  //     backgroundColor: Colors.white,
+                                  //     overlay:
+                                  //         ScrollWheelDatePickerOverlay.holo,
+                                  //     itemTextStyle: defaultItemTextStyle
+                                  //         .copyWith(color: Colors.black),
+                                  //     overlayColor: Colors.black,
+                                  //     overAndUnderCenterOpacity: 0.2,
+                                  //   ),
+                                  //   lastDate: DateTime.now(),
+                                  //   onSelectedItemChanged: (value) {
+                                  //     setState(() {
+                                  //       birthDate = value;
+                                  //     });
+                                  //   },
+                                  // ),
+                                  // ---------------------------------------
+                                  //     CupertinoDatePicker(
+                                  //   mode: CupertinoDatePickerMode.date,
+                                  //   initialDateTime: DateTime.now(),
+                                  //   onDateTimeChanged: (DateTime newDate) {
+                                  //     setState(() {
+                                  //       birthDate = newDate;
+                                  //     });
+                                  //   },
+                                  // ),
+                                  // ---------------------------------------
+                                  // DatePickerDialog(
+                                  //     firstDate: DateTime(1990),
+                                  //     lastDate: DateTime.now()),
                                 ),
                               ],
                             ),
