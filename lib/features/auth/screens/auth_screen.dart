@@ -1,3 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/notifiers/language_notifier.dart';
 import '../../../core/utils/navigators.dart';
 import 'login_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +10,58 @@ import '../../../core/widgets/rounded_elevated_button.dart';
 import '../../../core/widgets/rounded_outlined_button.dart';
 import 'number_registration_screen.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends ConsumerWidget {
   const AuthScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final languageProvider = ref.watch(appLanguageProvider);
+
+    String getHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'National Directorate of Consumer Protection';
+        case AppLanguage.bangla:
+          return 'জাতীয় ভোক্তা অধিকার সংরক্ষন অধিদপ্তর';
+      }
+    }
+
+    String getRegistrationText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Register';
+        case AppLanguage.bangla:
+          return 'রেজিস্ট্রেশন';
+      }
+    }
+
+    String getElseText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return '————— Or —————';
+        case AppLanguage.bangla:
+          return '—————   অথবা   —————';
+      }
+    }
+
+    String getAlreadyRegisteredText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Already registered?';
+        case AppLanguage.bangla:
+          return 'ইতঃমধ্যে রেজিস্ট্রেশন করেছেন?';
+      }
+    }
+
+    String getLoginText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'login';
+        case AppLanguage.bangla:
+          return 'লগইন';
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -24,27 +74,27 @@ class AuthScreen extends StatelessWidget {
             width: 100,
             child: Image.asset(Pngs.logo),
           ),
-          const Text(
-            'জাতীয় ভোক্তা অধিকার সংরক্ষন অধিদপ্তর',
+          Text(
+            getHeaderText(),
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 32,
             ),
           ),
           Column(
             children: [
               RoundedElevatedButton(
-                label: 'রেজিস্ট্রেশন',
+                label: getRegistrationText(),
                 onTap: () {
                   navigate(context, const NumberRegistrationScreen());
                 },
               ),
               const SizedBox(height: 8),
-              const Text('—————   অথবা   —————'),
-              const Text('ইতঃমধ্যে রেজিস্ট্রেশন করেছেন?'),
+              Text(getElseText()),
+              Text(getAlreadyRegisteredText()),
               const SizedBox(height: 8),
               RoundedOutlinedButton(
-                label: 'লগইন',
+                label: getLoginText(),
                 onTap: () {
                   navigate(context, const LoginScreen());
                 },

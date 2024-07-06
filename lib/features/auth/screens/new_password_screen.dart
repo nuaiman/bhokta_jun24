@@ -1,3 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/notifiers/language_notifier.dart';
 import '../../../core/utils/navigators.dart';
 import 'package:flutter/material.dart';
 
@@ -5,14 +8,14 @@ import '../../../core/constants/pngs.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 import 'personal_details_screen.dart';
 
-class NewPasswordScreen extends StatefulWidget {
+class NewPasswordScreen extends ConsumerStatefulWidget {
   const NewPasswordScreen({super.key});
 
   @override
-  State<NewPasswordScreen> createState() => _NewPasswordScreenState();
+  ConsumerState<NewPasswordScreen> createState() => _NewPasswordScreenState();
 }
 
-class _NewPasswordScreenState extends State<NewPasswordScreen> {
+class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   @override
@@ -24,6 +27,44 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = ref.watch(appLanguageProvider);
+
+    String getFirstHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Please add your';
+        case AppLanguage.bangla:
+          return 'আপনার পাসওয়ার্ড';
+      }
+    }
+
+    String getSecondHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'your password';
+        case AppLanguage.bangla:
+          return 'প্রদান করুন';
+      }
+    }
+
+    String getEnterPasswordText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Enter password';
+        case AppLanguage.bangla:
+          return 'পাসওয়ার্ড দিন';
+      }
+    }
+
+    String getConfirmPasswordText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Confirm password';
+        case AppLanguage.bangla:
+          return 'পাসওয়ার্ড নিশ্চিত করুন';
+      }
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -41,19 +82,19 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                 width: 100,
                 child: Image.asset(Pngs.logo),
               ),
-              const Column(
+              Column(
                 children: [
                   Text(
-                    'আপনার পাসওয়ার্ড',
+                    getFirstHeaderText(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 32,
                     ),
                   ),
                   Text(
-                    'প্রদান করুন',
+                    getSecondHeaderText(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 32,
                     ),
                   ),
@@ -65,9 +106,9 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: TextField(
                       controller: passwordController,
-                      decoration: const InputDecoration(
-                        hintText: 'পাসওয়ার্ড দিন',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        hintText: getEnterPasswordText(),
+                        border: const OutlineInputBorder(),
                       ),
                     ),
                   ),
@@ -76,9 +117,9 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: TextField(
                       controller: confirmPasswordController,
-                      decoration: const InputDecoration(
-                        hintText: 'পাসওয়ার্ড নিশ্চিত করুন',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        hintText: getConfirmPasswordText(),
+                        border: const OutlineInputBorder(),
                       ),
                     ),
                   ),

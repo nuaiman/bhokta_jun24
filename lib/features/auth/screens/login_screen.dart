@@ -1,4 +1,7 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/constants/palette.dart';
+import '../../../core/notifiers/language_notifier.dart';
 import '../../../core/utils/navigators.dart';
 import 'number_registration_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +9,14 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/pngs.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -26,6 +29,53 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = ref.watch(appLanguageProvider);
+
+    String getHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Please login';
+        case AppLanguage.bangla:
+          return 'লগইন করুন';
+      }
+    }
+
+    String getEnterMobileText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Enter mobile number';
+        case AppLanguage.bangla:
+          return 'মোবাইল নাম্বার লিখুন';
+      }
+    }
+
+    String getEnterPasswordText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Enter password';
+        case AppLanguage.bangla:
+          return 'পাসওয়ার্ড দিন';
+      }
+    }
+
+    String getDidForgetPasswordText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Forgot password?';
+        case AppLanguage.bangla:
+          return 'পাসওয়ার্ড ভুলে গেছেন?';
+      }
+    }
+
+    String getNextText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Next';
+        case AppLanguage.bangla:
+          return 'পরবর্তী';
+      }
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -43,10 +93,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 100,
                 child: Image.asset(Pngs.logo),
               ),
-              const Text(
-                'লগইন করুন',
+              Text(
+                getHeaderText(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 32,
                 ),
               ),
@@ -57,18 +107,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     TextField(
                       controller: phoneController,
-                      decoration: const InputDecoration(
-                        hintText: 'মোবাইল নাম্বার লিখুন',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        hintText: getEnterMobileText(),
+                        border: const OutlineInputBorder(),
                       ),
                       keyboardType: TextInputType.number,
                     ),
                     const SizedBox(height: 8),
                     TextField(
                       controller: passwordController,
-                      decoration: const InputDecoration(
-                        hintText: 'পাসওয়ার্ড দিন',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        hintText: getEnterPasswordText(),
+                        border: const OutlineInputBorder(),
                       ),
                       keyboardType: TextInputType.number,
                     ),
@@ -77,9 +127,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: () {
                         navigate(context, const NumberRegistrationScreen());
                       },
-                      child: const Text(
-                        'পাসওয়ার্ড ভুলে গেছেন?',
-                        style: TextStyle(
+                      child: Text(
+                        getDidForgetPasswordText(),
+                        style: const TextStyle(
                           color: AppPalette.green,
                         ),
                       ),
@@ -97,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
-          label: 'পরবর্তী',
+          label: getNextText(),
           onTap: () {
             // navigate(context, const OtpScreen());
           },

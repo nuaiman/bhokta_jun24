@@ -1,3 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/notifiers/language_notifier.dart';
 import '../../../core/utils/navigators.dart';
 import 'new_password_screen.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +11,14 @@ import '../../../core/constants/palette.dart';
 import '../../../core/constants/pngs.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 
-class OtpScreen extends StatefulWidget {
+class OtpScreen extends ConsumerStatefulWidget {
   const OtpScreen({super.key});
 
   @override
-  State<OtpScreen> createState() => _OtpScreenState();
+  ConsumerState<OtpScreen> createState() => _OtpScreenState();
 }
 
-class _OtpScreenState extends State<OtpScreen> {
+class _OtpScreenState extends ConsumerState<OtpScreen> {
   final otpController = TextEditingController();
 
   @override
@@ -26,6 +29,44 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = ref.watch(appLanguageProvider);
+
+    String getFirstHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Enter OTP number';
+        case AppLanguage.bangla:
+          return 'OTP প্রদান করুন';
+      }
+    }
+
+    String getErrorPinText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Pin is incorrect';
+        case AppLanguage.bangla:
+          return 'পিনটি ভুল';
+      }
+    }
+
+    String getResendOtpText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'resend OTP';
+        case AppLanguage.bangla:
+          return 'ওটিপি আবার পাঠান';
+      }
+    }
+
+    String getNextText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Next';
+        case AppLanguage.bangla:
+          return 'পরবর্তী';
+      }
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -43,10 +84,10 @@ class _OtpScreenState extends State<OtpScreen> {
                 width: 100,
                 child: Image.asset(Pngs.logo),
               ),
-              const Text(
-                'OTP প্রদান করুন',
+              Text(
+                getFirstHeaderText(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 32,
                 ),
               ),
@@ -80,7 +121,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       controller: otpController,
                       separatorBuilder: (index) => const SizedBox(width: 8),
                       validator: (value) {
-                        return value == '2222' ? null : 'Pin is incorrect';
+                        return value == '2222' ? null : getErrorPinText();
                       },
                       hapticFeedbackType: HapticFeedbackType.lightImpact,
                       onCompleted: (pin) {
@@ -94,9 +135,9 @@ class _OtpScreenState extends State<OtpScreen> {
                     OtpTimerButton(
                       height: 60,
                       onPressed: () {},
-                      text: const Text(
-                        'ওটিপি আবার পাঠান',
-                        style: TextStyle(fontSize: 16),
+                      text: Text(
+                        getResendOtpText(),
+                        style: const TextStyle(fontSize: 16),
                       ),
                       buttonType: ButtonType.text_button,
                       backgroundColor: const Color(0xFF212121),
@@ -115,7 +156,7 @@ class _OtpScreenState extends State<OtpScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
-          label: 'পরবর্তী',
+          label: getNextText(),
           onTap: () {
             navigate(context, const NewPasswordScreen());
           },

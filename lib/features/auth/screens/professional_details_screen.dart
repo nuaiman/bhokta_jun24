@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/pngs.dart';
+import '../../../core/notifiers/language_notifier.dart';
 import '../../../core/utils/navigators.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 import 'add_profile_picture_screen.dart';
 
-class ProfessionalDetailsScreen extends StatefulWidget {
+class ProfessionalDetailsScreen extends ConsumerStatefulWidget {
   const ProfessionalDetailsScreen({super.key});
 
   @override
-  State<ProfessionalDetailsScreen> createState() =>
+  ConsumerState<ProfessionalDetailsScreen> createState() =>
       _ProfessionalDetailsScreenState();
 }
 
-class _ProfessionalDetailsScreenState extends State<ProfessionalDetailsScreen> {
+class _ProfessionalDetailsScreenState
+    extends ConsumerState<ProfessionalDetailsScreen> {
   String? dropdownvalue;
 
   @override
@@ -23,6 +26,98 @@ class _ProfessionalDetailsScreenState extends State<ProfessionalDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = ref.watch(appLanguageProvider);
+
+    String getFirstHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Please enter your';
+        case AppLanguage.bangla:
+          return 'পেশাগত তথ্য প্রদান';
+      }
+    }
+
+    String getSecondHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'professional details';
+        case AppLanguage.bangla:
+          return 'করুন';
+      }
+    }
+
+    String getIAmAText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'I am a ';
+        case AppLanguage.bangla:
+          return 'আমি একজন ';
+      }
+    }
+
+    String getTeacherText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Teacher';
+        case AppLanguage.bangla:
+          return 'শিক্ষার্থী';
+      }
+    }
+
+    String getBusinessmanText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Business person';
+        case AppLanguage.bangla:
+          return 'ব্যবসায়ী';
+      }
+    }
+
+    String getServiceholderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Service-holder';
+        case AppLanguage.bangla:
+          return 'চাকুরীজীবী';
+      }
+    }
+
+    String getHouseWifeText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'House wife';
+        case AppLanguage.bangla:
+          return 'গৃহিণী';
+      }
+    }
+
+    String getFarmerText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Farmer';
+        case AppLanguage.bangla:
+          return 'কৃষক';
+      }
+    }
+
+    String getOtherProfessionText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Others';
+        case AppLanguage.bangla:
+          return 'অন্যান্য';
+      }
+    }
+
+    String getNextText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Next';
+        case AppLanguage.bangla:
+          return 'পরবর্তী';
+      }
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -42,19 +137,19 @@ class _ProfessionalDetailsScreenState extends State<ProfessionalDetailsScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                Column(
                   children: [
                     Text(
-                      'পেশাগত তথ্য প্রদান',
+                      getFirstHeaderText(),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 32,
                       ),
                     ),
                     Text(
-                      'করুন',
+                      getSecondHeaderText(),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 32,
                       ),
                     ),
@@ -68,15 +163,15 @@ class _ProfessionalDetailsScreenState extends State<ProfessionalDetailsScreen> {
                     collapsedShape: const OutlineInputBorder(),
                     shape: const OutlineInputBorder(),
                     title: Text(
-                      dropdownvalue == null ? 'আমি একজন ' : dropdownvalue!,
+                      dropdownvalue == null ? getIAmAText() : dropdownvalue!,
                       style: const TextStyle(fontSize: 16),
                     ),
                     children: [
                       ListTile(
-                        title: const Text('শিক্ষার্থী'),
+                        title: Text(getTeacherText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'শিক্ষার্থী';
+                            dropdownvalue = 'teacher';
                           });
                         },
                       ),
@@ -84,39 +179,39 @@ class _ProfessionalDetailsScreenState extends State<ProfessionalDetailsScreen> {
                         title: const Text('ব্যবসায়ী'),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'ব্যবসায়ী';
+                            dropdownvalue = 'business';
                           });
                         },
                       ),
                       ListTile(
-                        title: const Text('চাকুরীজীবী'),
+                        title: Text(getServiceholderText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'চাকুরীজীবী';
+                            dropdownvalue = 'serviceholder';
                           });
                         },
                       ),
                       ListTile(
-                        title: const Text('গৃহিণী'),
+                        title: Text(getHouseWifeText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'গৃহিণী';
+                            dropdownvalue = 'housewife';
                           });
                         },
                       ),
                       ListTile(
-                        title: const Text('কৃষক'),
+                        title: Text(getFarmerText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'কৃষক';
+                            dropdownvalue = 'farmer';
                           });
                         },
                       ),
                       ListTile(
-                        title: const Text('অন্যান্য'),
+                        title: Text(getOtherProfessionText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'অন্যান্য';
+                            dropdownvalue = 'others';
                           });
                         },
                       ),
@@ -134,7 +229,7 @@ class _ProfessionalDetailsScreenState extends State<ProfessionalDetailsScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
-          label: 'পরবর্তী',
+          label: getNextText(),
           onTap: () {
             navigate(context, const AddProfilePictureScreen());
           },

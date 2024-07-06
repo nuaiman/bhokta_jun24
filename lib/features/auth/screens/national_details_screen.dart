@@ -1,4 +1,7 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/constants/palette.dart';
+import '../../../core/notifiers/language_notifier.dart';
 import 'address_details_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -6,14 +9,15 @@ import '../../../core/constants/pngs.dart';
 import '../../../core/utils/navigators.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 
-class NationalDetailsScreen extends StatefulWidget {
+class NationalDetailsScreen extends ConsumerStatefulWidget {
   const NationalDetailsScreen({super.key});
 
   @override
-  State<NationalDetailsScreen> createState() => _NationalDetailsScreenState();
+  ConsumerState<NationalDetailsScreen> createState() =>
+      _NationalDetailsScreenState();
 }
 
-class _NationalDetailsScreenState extends State<NationalDetailsScreen> {
+class _NationalDetailsScreenState extends ConsumerState<NationalDetailsScreen> {
   final nidController = TextEditingController();
   final birthIdController = TextEditingController();
   final passportIdController = TextEditingController();
@@ -28,6 +32,71 @@ class _NationalDetailsScreenState extends State<NationalDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = ref.watch(appLanguageProvider);
+
+    String getFirstHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Please add your';
+        case AppLanguage.bangla:
+          return 'পরিচয় তথ্য প্রদান';
+      }
+    }
+
+    String getSecondHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'personal details';
+        case AppLanguage.bangla:
+          return 'করুন';
+      }
+    }
+
+    String getAddIdentityInformationHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Select identity information';
+        case AppLanguage.bangla:
+          return 'পরিচয় তথ্য নির্বাচন';
+      }
+    }
+
+    String getNidNumberText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'N.I.D number';
+        case AppLanguage.bangla:
+          return 'জাতীয় পরিচয় পত্রের নাম্বার';
+      }
+    }
+
+    String getBirthCertificateNumbereText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Birth certificate number';
+        case AppLanguage.bangla:
+          return 'জন্মনিবন্ধন সনদের নাম্বার';
+      }
+    }
+
+    String getPassportNumbereText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Passport number';
+        case AppLanguage.bangla:
+          return 'পাসপোর্টের নাম্বার';
+      }
+    }
+
+    String getNextText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Next';
+        case AppLanguage.bangla:
+          return 'পরবর্তী';
+      }
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -47,19 +116,19 @@ class _NationalDetailsScreenState extends State<NationalDetailsScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                Column(
                   children: [
                     Text(
-                      'পরিচয় তথ্য প্রদান',
+                      getFirstHeaderText(),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 32,
                       ),
                     ),
                     Text(
-                      'করুন',
+                      getSecondHeaderText(),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 32,
                       ),
                     ),
@@ -74,39 +143,43 @@ class _NationalDetailsScreenState extends State<NationalDetailsScreen> {
                     ),
                     child: Column(
                       children: [
-                        const TextField(
+                        TextField(
                           enabled: false,
                           decoration: InputDecoration(
-                            hintText: 'পরিচয় তথ্য নির্বাচন',
+                            hintText: getAddIdentityInformationHeaderText(),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 8),
                           ),
                         ),
                         const Divider(color: AppPalette.black),
                         TextField(
                           controller: nidController,
-                          decoration: const InputDecoration(
-                            hintText: 'জাতীয় পরিচয় পত্রের নাম্বার',
+                          decoration: InputDecoration(
+                            hintText: getNidNumberText(),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 8),
                           ),
                         ),
                         const Divider(color: AppPalette.black),
                         TextField(
                           controller: birthIdController,
-                          decoration: const InputDecoration(
-                            hintText: 'জন্মনিবন্ধন সনদের নাম্বার',
+                          decoration: InputDecoration(
+                            hintText: getBirthCertificateNumbereText(),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 8),
                           ),
                         ),
                         const Divider(color: AppPalette.black),
                         TextField(
                           controller: passportIdController,
-                          decoration: const InputDecoration(
-                            hintText: 'পাসপোর্টের নাম্বার',
+                          decoration: InputDecoration(
+                            hintText: getPassportNumbereText(),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 8),
                           ),
                         ),
                       ],
@@ -124,7 +197,7 @@ class _NationalDetailsScreenState extends State<NationalDetailsScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
-          label: 'পরবর্তী',
+          label: getNextText(),
           onTap: () {
             navigate(context, const AddressDetailsScreen());
           },
