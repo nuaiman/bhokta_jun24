@@ -17,7 +17,7 @@ class BhoktaOdhikarConsumerApp extends StatelessWidget {
       title: 'Bhokta Odhikar Consumer',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Palette.green),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppPalette.green),
         useMaterial3: true,
       ),
       home: const LandingScreen(),

@@ -9,7 +9,7 @@ class RoundedOutlinedButton extends StatelessWidget {
   const RoundedOutlinedButton({
     super.key,
     required this.label,
-    this.textColor = Palette.green,
+    this.textColor = AppPalette.green,
     required this.onTap,
   });
 

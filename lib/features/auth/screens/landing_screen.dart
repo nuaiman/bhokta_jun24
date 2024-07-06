@@ -61,8 +61,8 @@ class LandingScreen extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
           label: 'শুরু করুন',
-          bgColor: Palette.white,
-          textColor: Palette.black,
+          bgColor: AppPalette.white,
+          textColor: AppPalette.black,
           onTap: () {
             navigate(
               context,

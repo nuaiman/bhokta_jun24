@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: const Text(
                         'পাসওয়ার্ড ভুলে গেছেন?',
                         style: TextStyle(
-                          color: Palette.green,
+                          color: AppPalette.green,
                         ),
                       ),
                     ),

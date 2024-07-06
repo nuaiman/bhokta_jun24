@@ -82,7 +82,7 @@ class _NationalDetailsScreenState extends State<NationalDetailsScreen> {
                             contentPadding: EdgeInsets.symmetric(horizontal: 8),
                           ),
                         ),
-                        const Divider(color: Palette.black),
+                        const Divider(color: AppPalette.black),
                         TextField(
                           controller: nidController,
                           decoration: const InputDecoration(
@@ -91,7 +91,7 @@ class _NationalDetailsScreenState extends State<NationalDetailsScreen> {
                             contentPadding: EdgeInsets.symmetric(horizontal: 8),
                           ),
                         ),
-                        const Divider(color: Palette.black),
+                        const Divider(color: AppPalette.black),
                         TextField(
                           controller: birthIdController,
                           decoration: const InputDecoration(
@@ -100,7 +100,7 @@ class _NationalDetailsScreenState extends State<NationalDetailsScreen> {
                             contentPadding: EdgeInsets.symmetric(horizontal: 8),
                           ),
                         ),
-                        const Divider(color: Palette.black),
+                        const Divider(color: AppPalette.black),
                         TextField(
                           controller: passportIdController,
                           decoration: const InputDecoration(

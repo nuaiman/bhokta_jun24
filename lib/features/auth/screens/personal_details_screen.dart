@@ -211,7 +211,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                                     ? 'জন্ম তারিখ*'
                                     : DateFormat('d MMM yyyy')
                                         .format(birthDate!),
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                               children: [
                                 SizedBox(

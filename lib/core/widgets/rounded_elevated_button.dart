@@ -10,8 +10,8 @@ class RoundedElevatedButton extends StatelessWidget {
   const RoundedElevatedButton({
     super.key,
     required this.label,
-    this.bgColor = Palette.green,
-    this.textColor = Palette.white,
+    this.bgColor = AppPalette.green,
+    this.textColor = AppPalette.white,
     required this.onTap,
   });
 
