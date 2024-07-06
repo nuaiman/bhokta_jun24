@@ -18,7 +18,7 @@ class AppLanguageNotifier extends StateNotifier<AppLanguage> {
       final int languageIndex = prefs.getInt(_key)!;
       state = AppLanguage.values[languageIndex];
     } else {
-      state = AppLanguage.english;
+      state = AppLanguage.bangla;
     }
   }
 
@@ -58,7 +58,7 @@ class AppLanguageNotifier extends StateNotifier<AppLanguage> {
 
 // -----------------------------------------------------------------------------
 
-final languageProvider =
+final appLanguageProvider =
     StateNotifierProvider<AppLanguageNotifier, AppLanguage>((ref) {
   return AppLanguageNotifier();
 });

@@ -1,18 +1,22 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/notifiers/language_notifier.dart';
 import '../../../core/widgets/rounded_outlined_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 
-class AddProfilePictureScreen extends StatefulWidget {
+class AddProfilePictureScreen extends ConsumerStatefulWidget {
   const AddProfilePictureScreen({super.key});
 
   @override
-  State<AddProfilePictureScreen> createState() =>
+  ConsumerState<AddProfilePictureScreen> createState() =>
       _AddProfilePictureScreenState();
 }
 
-class _AddProfilePictureScreenState extends State<AddProfilePictureScreen> {
+class _AddProfilePictureScreenState
+    extends ConsumerState<AddProfilePictureScreen> {
   String? dropdownvalue;
 
   @override
@@ -22,6 +26,44 @@ class _AddProfilePictureScreenState extends State<AddProfilePictureScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = ref.watch(appLanguageProvider);
+
+    String getFirstHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Please add your';
+        case AppLanguage.bangla:
+          return 'প্রোফাইলের ছবি';
+      }
+    }
+
+    String getSecondHeaderText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'profile picture';
+        case AppLanguage.bangla:
+          return 'যোগ করুন';
+      }
+    }
+
+    String getCameraButtonText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Camera';
+        case AppLanguage.bangla:
+          return 'ছবি তুলুন';
+      }
+    }
+
+    String getGalleryButtonText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Gallery';
+        case AppLanguage.bangla:
+          return 'আপলোড';
+      }
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -42,19 +84,19 @@ class _AddProfilePictureScreenState extends State<AddProfilePictureScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Column(
+                Column(
                   children: [
                     Text(
-                      'প্রোফাইলের ছবি',
+                      getFirstHeaderText(),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 32,
                       ),
                     ),
                     Text(
-                      'যোগ করুন',
+                      getSecondHeaderText(),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 32,
                       ),
                     ),
@@ -78,11 +120,11 @@ class _AddProfilePictureScreenState extends State<AddProfilePictureScreen> {
                         children: [
                           Expanded(
                             child: RoundedOutlinedButton(
-                                label: 'ছবি তুলুন', onTap: () {}),
+                                label: getCameraButtonText(), onTap: () {}),
                           ),
                           Expanded(
                             child: RoundedElevatedButton(
-                                label: 'আপলোড', onTap: () {}),
+                                label: getGalleryButtonText(), onTap: () {}),
                           ),
                         ],
                       ),
