@@ -1,7 +1,8 @@
+import 'package:bhokta_consumer/features/dashboard/screens/dasboard_screen.dart';
+
 import 'core/constants/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'features/auth/screens/landing_language_selection_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: BhoktaOdhikarConsumerApp()));
@@ -19,7 +20,8 @@ class BhoktaOdhikarConsumerApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppPalette.green),
         useMaterial3: true,
       ),
-      home: const LandingLanguageSelectionScreen(),
+      // home: const LandingLanguageSelectionScreen(),
+      home: const DashboardScreen(),
     );
   }
 }
