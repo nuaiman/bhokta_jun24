@@ -8,7 +8,7 @@ import '../../../core/utils/navigators.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/language_card.dart';
+import '../widgets/language_card.dart';
 
 class LandingLanguageSelectionScreen extends ConsumerWidget {
   const LandingLanguageSelectionScreen({super.key});

@@ -9,6 +9,7 @@ import '../../../core/utils/snackbar.dart';
 import '../../../models/user.dart';
 import '../screens/add_profile_picture_screen.dart';
 import '../screens/address_details_screen.dart';
+import '../screens/confirm_user_details_screen.dart';
 import '../screens/national_details_screen.dart';
 import '../screens/professional_details_screen.dart';
 
@@ -197,7 +198,7 @@ class UserNotifier extends StateNotifier<User> {
       return;
     }
     state = state.copyWith(profileUrl: image.path);
-    navigate(context, const AddProfilePictureScreen());
+    navigate(context, ConfirmUserDetailsScreen(image: image));
   }
 }
 // -----------------------------------------------------------------------------

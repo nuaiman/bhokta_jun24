@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../core/constants/palette.dart';
-import '../../core/notifiers/language_notifier.dart';
+import '../../../core/constants/palette.dart';
+import '../../../core/notifiers/language_notifier.dart';
 
 class LanguageCard extends ConsumerWidget {
   final String label;

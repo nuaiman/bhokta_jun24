@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bhokta_consumer/core/utils/pick_pictures.dart';
 import 'package:bhokta_consumer/features/auth/notifiers/user_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -76,6 +77,26 @@ class _AddProfilePictureScreenState
       }
     }
 
+    Future<void> pickFromCamera(BuildContext context) async {
+      final image = await pickCameraImage();
+      if (image == null) {
+        return;
+      }
+      setState(() {
+        pickedImage = image;
+      });
+    }
+
+    Future<void> pickFromGallery(BuildContext context) async {
+      final image = await pickGalleryImage();
+      if (image == null) {
+        return;
+      }
+      setState(() {
+        pickedImage = image;
+      });
+    }
+
     void addProfileImage(
         BuildContext context, AppLanguage language, File? image) {
       ref.read(userProvider.notifier).addProfileImage(context, language, image);
@@ -123,12 +144,17 @@ class _AddProfilePictureScreenState
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 80,
-                        child: Icon(
-                          Icons.person_2_outlined,
-                          size: 60,
-                        ),
+                        child: pickedImage == null
+                            ? const Icon(
+                                Icons.person_2_outlined,
+                                size: 60,
+                              )
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.file(pickedImage!),
+                              ),
                       ),
                       const SizedBox(
                         height: 80,
@@ -137,11 +163,13 @@ class _AddProfilePictureScreenState
                         children: [
                           Expanded(
                             child: RoundedOutlinedButton(
-                                label: getCameraButtonText(), onTap: () {}),
+                                label: getCameraButtonText(),
+                                onTap: () => pickFromCamera(context)),
                           ),
                           Expanded(
                             child: RoundedElevatedButton(
-                                label: getGalleryButtonText(), onTap: () {}),
+                                label: getGalleryButtonText(),
+                                onTap: () => pickFromGallery(context)),
                           ),
                         ],
                       ),
