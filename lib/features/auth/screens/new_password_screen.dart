@@ -2,12 +2,10 @@ import 'package:bhokta_consumer/features/auth/notifiers/auth_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/notifiers/language_notifier.dart';
-import '../../../core/utils/navigators.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
-import 'personal_details_screen.dart';
 
 class NewPasswordScreen extends ConsumerStatefulWidget {
   const NewPasswordScreen({super.key});

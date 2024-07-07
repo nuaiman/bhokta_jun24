@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:bhokta_consumer/core/notifiers/language_notifier.dart';
 import 'package:bhokta_consumer/core/utils/snackbar.dart';
+import 'package:bhokta_consumer/features/dashboard/screens/dasboard_screen.dart';
+import 'package:bhokta_consumer/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -54,6 +58,11 @@ class AuthNotifier extends StateNotifier<Auth> {
     }
     state = state.copyWith(password: password);
     navigate(context, const PersonalDetailsScreen());
+  }
+
+  Future<void> signup(BuildContext context, AppLanguage language, File image,
+      User userDetails) async {
+    navigateAndRemoveUntil(context, DashboardScreen());
   }
 }
 // -----------------------------------------------------------------------------

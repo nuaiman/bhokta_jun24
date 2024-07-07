@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:bhokta_consumer/core/constants/palette.dart';
 import 'package:bhokta_consumer/core/widgets/rounded_outlined_button.dart';
+import 'package:bhokta_consumer/features/auth/notifiers/auth_notifier.dart';
 import 'package:bhokta_consumer/features/auth/notifiers/user_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import '../../../core/constants/pngs.dart';
 import '../../../core/notifiers/language_notifier.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
+import '../../../models/user.dart';
 import '../widgets/user_details_field.dart';
 
 class ConfirmUserDetailsScreen extends ConsumerWidget {
@@ -163,6 +164,13 @@ class ConfirmUserDetailsScreen extends ConsumerWidget {
         case AppLanguage.bangla:
           return 'পরবর্তী';
       }
+    }
+
+    void signup(BuildContext context, AppLanguage language, File image,
+        User userDetails) {
+      ref
+          .read(authProvider.notifier)
+          .signup(context, language, image, userDetails);
     }
 
     return Scaffold(
@@ -357,7 +365,12 @@ class ConfirmUserDetailsScreen extends ConsumerWidget {
             Expanded(
               child: RoundedElevatedButton(
                 label: getNextText(),
-                onTap: () {},
+                onTap: () => signup(
+                  context,
+                  languageProvider,
+                  image,
+                  userDetails,
+                ),
               ),
             ),
           ],

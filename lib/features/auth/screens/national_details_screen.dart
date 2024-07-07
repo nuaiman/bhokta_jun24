@@ -3,11 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/palette.dart';
 import '../../../core/notifiers/language_notifier.dart';
-import 'address_details_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';
-import '../../../core/utils/navigators.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 
 class NationalDetailsScreen extends ConsumerStatefulWidget {
