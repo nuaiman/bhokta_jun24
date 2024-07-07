@@ -1,3 +1,4 @@
+import 'package:bhokta_consumer/features/auth/notifiers/user_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/palette.dart';
@@ -64,9 +65,9 @@ class _NationalDetailsScreenState extends ConsumerState<NationalDetailsScreen> {
     String getNidNumberText() {
       switch (languageProvider) {
         case AppLanguage.english:
-          return 'N.I.D number';
+          return 'N.I.D number *';
         case AppLanguage.bangla:
-          return 'জাতীয় পরিচয় পত্রের নাম্বার';
+          return 'জাতীয় পরিচয় পত্রের নাম্বার *';
       }
     }
 
@@ -95,6 +96,22 @@ class _NationalDetailsScreenState extends ConsumerState<NationalDetailsScreen> {
         case AppLanguage.bangla:
           return 'পরবর্তী';
       }
+    }
+
+    void addNationalDetails(
+      BuildContext context,
+      AppLanguage language,
+      String nidNumber,
+      String passportNumber,
+      String birthCertificateNumber,
+    ) {
+      ref.read(userProvider.notifier).addNationalDetails(
+            context,
+            language,
+            nidNumber,
+            passportNumber,
+            birthCertificateNumber,
+          );
     }
 
     return Scaffold(
@@ -161,6 +178,7 @@ class _NationalDetailsScreenState extends ConsumerState<NationalDetailsScreen> {
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 8),
                           ),
+                          keyboardType: TextInputType.number,
                         ),
                         const Divider(color: AppPalette.black),
                         TextField(
@@ -171,6 +189,7 @@ class _NationalDetailsScreenState extends ConsumerState<NationalDetailsScreen> {
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 8),
                           ),
+                          keyboardType: TextInputType.number,
                         ),
                         const Divider(color: AppPalette.black),
                         TextField(
@@ -181,6 +200,7 @@ class _NationalDetailsScreenState extends ConsumerState<NationalDetailsScreen> {
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 8),
                           ),
+                          keyboardType: TextInputType.number,
                         ),
                       ],
                     ),
@@ -198,9 +218,19 @@ class _NationalDetailsScreenState extends ConsumerState<NationalDetailsScreen> {
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
           label: getNextText(),
-          onTap: () {
-            navigate(context, const AddressDetailsScreen());
-          },
+          onTap: () => addNationalDetails(
+            context,
+            languageProvider,
+            nidController.text.trim().isNotEmpty
+                ? nidController.text.trim()
+                : '',
+            passportIdController.text.trim().isNotEmpty
+                ? passportIdController.text.trim()
+                : '',
+            birthIdController.text.trim().isNotEmpty
+                ? birthIdController.text.trim()
+                : '',
+          ),
         ),
       ),
     );

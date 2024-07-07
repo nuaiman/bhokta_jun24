@@ -1,8 +1,7 @@
+import 'package:bhokta_consumer/features/auth/notifiers/auth_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/notifiers/language_notifier.dart';
-import '../../../core/utils/navigators.dart';
-import 'new_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_timer_button/otp_timer_button.dart';
 import 'package:pinput/pinput.dart';
@@ -67,6 +66,10 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
       }
     }
 
+    void verifyOTP(BuildContext context, AppLanguage language, String otp) {
+      ref.read(authProvider.notifier).verifyOTP(context, language, otp);
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -120,16 +123,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                       ),
                       controller: otpController,
                       separatorBuilder: (index) => const SizedBox(width: 8),
-                      validator: (value) {
-                        return value == '2222' ? null : getErrorPinText();
-                      },
                       hapticFeedbackType: HapticFeedbackType.lightImpact,
-                      onCompleted: (pin) {
-                        debugPrint('onCompleted: $pin');
-                      },
-                      onChanged: (value) {
-                        debugPrint('onChanged: $value');
-                      },
                     ),
                     const SizedBox(height: 20),
                     OtpTimerButton(
@@ -157,9 +151,11 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
           label: getNextText(),
-          onTap: () {
-            navigate(context, const NewPasswordScreen());
-          },
+          onTap: () => verifyOTP(
+            context,
+            languageProvider,
+            otpController.text.trim(),
+          ),
         ),
       ),
     );

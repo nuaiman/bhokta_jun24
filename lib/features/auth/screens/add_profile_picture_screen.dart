@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:bhokta_consumer/features/auth/notifiers/user_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/notifiers/language_notifier.dart';
@@ -17,7 +20,7 @@ class AddProfilePictureScreen extends ConsumerStatefulWidget {
 
 class _AddProfilePictureScreenState
     extends ConsumerState<AddProfilePictureScreen> {
-  String? dropdownvalue;
+  File? pickedImage;
 
   @override
   void dispose() {
@@ -71,6 +74,11 @@ class _AddProfilePictureScreenState
         case AppLanguage.bangla:
           return 'পরবর্তী';
       }
+    }
+
+    void addProfileImage(
+        BuildContext context, AppLanguage language, File? image) {
+      ref.read(userProvider.notifier).addProfileImage(context, language, image);
     }
 
     return Scaffold(
@@ -152,9 +160,7 @@ class _AddProfilePictureScreenState
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
           label: getNextText(),
-          onTap: () {
-            // navigate(context, const NationalDetailsScreen());
-          },
+          onTap: () => addProfileImage(context, languageProvider, pickedImage),
         ),
       ),
     );

@@ -1,11 +1,10 @@
+import 'package:bhokta_consumer/features/auth/notifiers/user_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/pngs.dart';
 import '../../../core/notifiers/language_notifier.dart';
-import '../../../core/utils/navigators.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
-import 'add_profile_picture_screen.dart';
 
 class ProfessionalDetailsScreen extends ConsumerStatefulWidget {
   const ProfessionalDetailsScreen({super.key});
@@ -17,7 +16,7 @@ class ProfessionalDetailsScreen extends ConsumerStatefulWidget {
 
 class _ProfessionalDetailsScreenState
     extends ConsumerState<ProfessionalDetailsScreen> {
-  String? dropdownvalue;
+  String? profession;
 
   @override
   void dispose() {
@@ -118,6 +117,13 @@ class _ProfessionalDetailsScreenState
       }
     }
 
+    void addProfessionDetails(
+        BuildContext context, AppLanguage language, String? profession) {
+      ref
+          .read(userProvider.notifier)
+          .addProfessionDetails(context, language, profession);
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -163,7 +169,7 @@ class _ProfessionalDetailsScreenState
                     collapsedShape: const OutlineInputBorder(),
                     shape: const OutlineInputBorder(),
                     title: Text(
-                      dropdownvalue == null ? getIAmAText() : dropdownvalue!,
+                      profession == null ? getIAmAText() : profession!,
                       style: const TextStyle(fontSize: 16),
                     ),
                     children: [
@@ -171,7 +177,7 @@ class _ProfessionalDetailsScreenState
                         title: Text(getTeacherText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'teacher';
+                            profession = 'teacher';
                           });
                         },
                       ),
@@ -179,7 +185,7 @@ class _ProfessionalDetailsScreenState
                         title: Text(getBusinessmanText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'business';
+                            profession = 'business';
                           });
                         },
                       ),
@@ -187,7 +193,7 @@ class _ProfessionalDetailsScreenState
                         title: Text(getServiceholderText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'serviceholder';
+                            profession = 'serviceholder';
                           });
                         },
                       ),
@@ -195,7 +201,7 @@ class _ProfessionalDetailsScreenState
                         title: Text(getHouseWifeText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'housewife';
+                            profession = 'housewife';
                           });
                         },
                       ),
@@ -203,7 +209,7 @@ class _ProfessionalDetailsScreenState
                         title: Text(getFarmerText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'farmer';
+                            profession = 'farmer';
                           });
                         },
                       ),
@@ -211,7 +217,7 @@ class _ProfessionalDetailsScreenState
                         title: Text(getOtherProfessionText()),
                         onTap: () {
                           setState(() {
-                            dropdownvalue = 'others';
+                            profession = 'others';
                           });
                         },
                       ),
@@ -230,9 +236,11 @@ class _ProfessionalDetailsScreenState
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
           label: getNextText(),
-          onTap: () {
-            navigate(context, const AddProfilePictureScreen());
-          },
+          onTap: () => addProfessionDetails(
+            context,
+            languageProvider,
+            profession,
+          ),
         ),
       ),
     );

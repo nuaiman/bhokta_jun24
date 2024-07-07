@@ -1,8 +1,7 @@
+import 'package:bhokta_consumer/features/auth/notifiers/auth_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/notifiers/language_notifier.dart';
-import '../../../core/utils/navigators.dart';
-import 'otp_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';
@@ -66,6 +65,13 @@ class _NumberRegistrationScreenState
       }
     }
 
+    void addMobile(
+        BuildContext context, AppLanguage language, String mobileNumber) {
+      ref
+          .read(authProvider.notifier)
+          .addPhoneNumber(context, language, mobileNumber);
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -123,9 +129,11 @@ class _NumberRegistrationScreenState
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
           label: getNextText(),
-          onTap: () {
-            navigate(context, const OtpScreen());
-          },
+          onTap: () => addMobile(
+            context,
+            languageProvider,
+            phoneController.text.trim(),
+          ),
         ),
       ),
     );

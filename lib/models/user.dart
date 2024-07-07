@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class User {
   final String id;
   final String fullName;
@@ -7,9 +8,9 @@ class User {
   final DateTime birthDate;
   final String gender;
   final String profession;
-  final int nidNumber;
-  final int passportNumber;
-  final int birthCertificateNumber;
+  final String nidNumber;
+  final String passportNumber;
+  final String birthCertificateNumber;
   final String fullAddress;
   final String division;
   final String district;
@@ -35,4 +36,46 @@ class User {
     required this.complains,
     required this.agreedToTermsAndConditions,
   });
+
+  User copyWith({
+    String? id,
+    String? fullName,
+    String? profileUrl,
+    String? fatherName,
+    String? motherName,
+    DateTime? birthDate,
+    String? gender,
+    String? profession,
+    String? nidNumber,
+    String? passportNumber,
+    String? birthCertificateNumber,
+    String? fullAddress,
+    String? division,
+    String? district,
+    String? postalCode,
+    List<String>? complains,
+    bool? agreedToTermsAndConditions,
+  }) {
+    return User(
+      id: id ?? this.id,
+      fullName: fullName ?? this.fullName,
+      profileUrl: profileUrl ?? this.profileUrl,
+      fatherName: fatherName ?? this.fatherName,
+      motherName: motherName ?? this.motherName,
+      birthDate: birthDate ?? this.birthDate,
+      gender: gender ?? this.gender,
+      profession: profession ?? this.profession,
+      nidNumber: nidNumber ?? this.nidNumber,
+      passportNumber: passportNumber ?? this.passportNumber,
+      birthCertificateNumber:
+          birthCertificateNumber ?? this.birthCertificateNumber,
+      fullAddress: fullAddress ?? this.fullAddress,
+      division: division ?? this.division,
+      district: district ?? this.district,
+      postalCode: postalCode ?? this.postalCode,
+      complains: complains ?? this.complains,
+      agreedToTermsAndConditions:
+          agreedToTermsAndConditions ?? this.agreedToTermsAndConditions,
+    );
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:bhokta_consumer/features/auth/notifiers/auth_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/notifiers/language_notifier.dart';
@@ -74,6 +75,13 @@ class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
       }
     }
 
+    void addNewPassword(BuildContext context, AppLanguage language,
+        String password, String confirmPassword) {
+      ref
+          .read(authProvider.notifier)
+          .addNewPassword(context, language, password, confirmPassword);
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -145,9 +153,12 @@ class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
           label: getNextText(),
-          onTap: () {
-            navigate(context, const PersonalDetailsScreen());
-          },
+          onTap: () => addNewPassword(
+            context,
+            languageProvider,
+            passwordController.text.trim(),
+            confirmPasswordController.text.trim(),
+          ),
         ),
       ),
     );

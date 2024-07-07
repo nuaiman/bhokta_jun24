@@ -1,11 +1,10 @@
+import 'package:bhokta_consumer/features/auth/notifiers/user_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/notifiers/language_notifier.dart';
-import 'professional_details_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';
-import '../../../core/utils/navigators.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 
 class AddressDetailsScreen extends ConsumerStatefulWidget {
@@ -18,7 +17,7 @@ class AddressDetailsScreen extends ConsumerStatefulWidget {
 
 class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> {
   String? division;
-  String? state;
+  String? district;
   final addressController = TextEditingController();
   final postCodeController = TextEditingController();
 
@@ -94,6 +93,18 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> {
         case AppLanguage.bangla:
           return 'পরবর্তী';
       }
+    }
+
+    void addAddressDetails(
+      BuildContext context,
+      AppLanguage language,
+      String fullAddress,
+      String? division,
+      String? district,
+      String postalCode,
+    ) {
+      ref.read(userProvider.notifier).addAddressDetails(
+          context, language, fullAddress, division, district, postalCode);
     }
 
     return Scaffold(
@@ -175,9 +186,9 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> {
                               collapsedShape: const OutlineInputBorder(),
                               shape: const OutlineInputBorder(),
                               title: Text(
-                                division == null
+                                district == null
                                     ? getDistrictText()
-                                    : division!,
+                                    : district!,
                                 style: const TextStyle(fontSize: 16),
                               ),
                               children: [
@@ -185,7 +196,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> {
                                   title: Text(getDhakaText()),
                                   onTap: () {
                                     setState(() {
-                                      division = 'dhaka';
+                                      district = 'dhaka';
                                     });
                                   },
                                 ),
@@ -220,9 +231,14 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> {
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
           label: getNextText(),
-          onTap: () {
-            navigate(context, const ProfessionalDetailsScreen());
-          },
+          onTap: () => addAddressDetails(
+            context,
+            languageProvider,
+            addressController.text.trim(),
+            division,
+            district,
+            postCodeController.text.trim(),
+          ),
         ),
       ),
     );

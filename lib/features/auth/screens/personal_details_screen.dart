@@ -1,13 +1,12 @@
+import 'package:bhokta_consumer/features/auth/notifiers/user_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 import '../../../core/notifiers/language_notifier.dart';
-import 'national_details_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/pngs.dart';
-import '../../../core/utils/navigators.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 
 class PersonalDetailsScreen extends ConsumerStatefulWidget {
@@ -19,7 +18,7 @@ class PersonalDetailsScreen extends ConsumerStatefulWidget {
 }
 
 class _PersonalDetailsScreenState extends ConsumerState<PersonalDetailsScreen> {
-  String? dropdownvalue;
+  String? pickedGender;
   DateTime? birthDate;
   final nameController = TextEditingController();
   final fatherNameController = TextEditingController();
@@ -134,6 +133,19 @@ class _PersonalDetailsScreenState extends ConsumerState<PersonalDetailsScreen> {
         case AppLanguage.bangla:
           return 'পরবর্তী';
       }
+    }
+
+    void addPersonalDetails(
+      BuildContext context,
+      AppLanguage language,
+      String fullName,
+      String fathername,
+      String motherName,
+      String? gender,
+      DateTime? birthDate,
+    ) {
+      ref.read(userProvider.notifier).addPersonalDetails(context, language,
+          fullName, fathername, motherName, gender, birthDate);
     }
 
     return Scaffold(
@@ -268,9 +280,9 @@ class _PersonalDetailsScreenState extends ConsumerState<PersonalDetailsScreen> {
                               collapsedShape: const OutlineInputBorder(),
                               shape: const OutlineInputBorder(),
                               title: Text(
-                                dropdownvalue == null
+                                pickedGender == null
                                     ? getGenderText()
-                                    : dropdownvalue!,
+                                    : pickedGender!,
                                 style: const TextStyle(fontSize: 16),
                               ),
                               children: [
@@ -278,7 +290,7 @@ class _PersonalDetailsScreenState extends ConsumerState<PersonalDetailsScreen> {
                                   title: Text(getMaleText()),
                                   onTap: () {
                                     setState(() {
-                                      dropdownvalue = 'male';
+                                      pickedGender = 'male';
                                     });
                                   },
                                 ),
@@ -286,7 +298,7 @@ class _PersonalDetailsScreenState extends ConsumerState<PersonalDetailsScreen> {
                                   title: Text(getFemaleText()),
                                   onTap: () {
                                     setState(() {
-                                      dropdownvalue = 'female';
+                                      pickedGender = 'female';
                                     });
                                   },
                                 ),
@@ -294,7 +306,7 @@ class _PersonalDetailsScreenState extends ConsumerState<PersonalDetailsScreen> {
                                   title: Text(getOthersText()),
                                   onTap: () {
                                     setState(() {
-                                      dropdownvalue = 'others';
+                                      pickedGender = 'others';
                                     });
                                   },
                                 ),
@@ -381,9 +393,15 @@ class _PersonalDetailsScreenState extends ConsumerState<PersonalDetailsScreen> {
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
           label: getNextText(),
-          onTap: () {
-            navigate(context, const NationalDetailsScreen());
-          },
+          onTap: () => addPersonalDetails(
+            context,
+            languageProvider,
+            nameController.text.trim(),
+            fatherNameController.text.trim(),
+            motherNameController.text.trim(),
+            pickedGender,
+            birthDate,
+          ),
         ),
       ),
     );
