@@ -41,7 +41,7 @@ class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
     String getSecondHeaderText() {
       switch (languageProvider) {
         case AppLanguage.english:
-          return 'your password';
+          return 'password';
         case AppLanguage.bangla:
           return 'প্রদান করুন';
       }
@@ -62,6 +62,15 @@ class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
           return 'Confirm password';
         case AppLanguage.bangla:
           return 'পাসওয়ার্ড নিশ্চিত করুন';
+      }
+    }
+
+    String getNextText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Next';
+        case AppLanguage.bangla:
+          return 'পরবর্তী';
       }
     }
 
@@ -135,7 +144,7 @@ class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
-          label: 'পরবর্তী',
+          label: getNextText(),
           onTap: () {
             navigate(context, const PersonalDetailsScreen());
           },

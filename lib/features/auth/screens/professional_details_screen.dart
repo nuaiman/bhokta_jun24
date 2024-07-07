@@ -176,7 +176,7 @@ class _ProfessionalDetailsScreenState
                         },
                       ),
                       ListTile(
-                        title: const Text('ব্যবসায়ী'),
+                        title: Text(getBusinessmanText()),
                         onTap: () {
                           setState(() {
                             dropdownvalue = 'business';

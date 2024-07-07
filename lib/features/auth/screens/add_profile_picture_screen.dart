@@ -64,6 +64,15 @@ class _AddProfilePictureScreenState
       }
     }
 
+    String getNextText() {
+      switch (languageProvider) {
+        case AppLanguage.english:
+          return 'Next';
+        case AppLanguage.bangla:
+          return 'পরবর্তী';
+      }
+    }
+
     return Scaffold(
       extendBody: false,
       extendBodyBehindAppBar: false,
@@ -142,7 +151,7 @@ class _AddProfilePictureScreenState
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: RoundedElevatedButton(
-          label: 'পরবর্তী',
+          label: getNextText(),
           onTap: () {
             // navigate(context, const NationalDetailsScreen());
           },

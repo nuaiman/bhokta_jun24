@@ -8,21 +8,12 @@ import '../../../core/utils/navigators.dart';
 import '../../../core/widgets/rounded_elevated_button.dart';
 import 'package:flutter/material.dart';
 
-class LandingScreenLanguageSelection extends ConsumerWidget {
-  const LandingScreenLanguageSelection({super.key});
+class LandingLanguageSelectionScreen extends ConsumerWidget {
+  const LandingLanguageSelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final languageProvider = ref.watch(appLanguageProvider);
-
-    String getWelcomeText() {
-      switch (languageProvider) {
-        case AppLanguage.english:
-          return 'Welcome to the official application of National Directorate of Consumer Protection';
-        case AppLanguage.bangla:
-          return 'জাতীয় ভোক্তা অধিকার সংরক্ষন অধিদপ্তরে অফিসিয়াল এপ্লিকেশনে আপনাকে স্বাগতম';
-      }
-    }
 
     String getButtonText() {
       switch (languageProvider) {
@@ -169,6 +160,9 @@ class LanguageCard extends ConsumerWidget {
               color: appLanguage == selectedLanguage
                   ? AppPalette.green
                   : AppPalette.black,
+              fontWeight: appLanguage == selectedLanguage
+                  ? FontWeight.bold
+                  : FontWeight.normal,
             ),
           ),
         ),
